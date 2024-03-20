@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { Context, HttpRequest } from '@azure/functions';
+import { InvocationContext, HttpRequest } from '@azure/functions';
 import { HttpServer, INestApplication } from '@nestjs/common';
-import { createHandlerAdapter } from './adapter/azure-adapter';
+import { createHandlerAdapter } from './adapter';
 import { AzureHttpRouter } from './router';
 
 let handler: Function;
@@ -9,7 +9,7 @@ let handler: Function;
 export class AzureHttpAdapterStatic {
   handle(
     createApp: () => Promise<INestApplication>,
-    context: Context,
+    context: InvocationContext,
     req: HttpRequest
   ) {
     if (handler) {
